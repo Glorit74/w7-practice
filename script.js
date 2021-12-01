@@ -37,29 +37,60 @@ const inputElement = (type, name, label) => {
         </div>
     `;
 };
+
+const selectElement = (type, name, title, options) => {
+    let optionsToSelect = "";
+    for (const op of options) {
+
+        optionsToSelect += `
+        <option>
+            ${op}
+        </option>
+        `;
+    }
+    return `
+        <div>
+            <label>${title}</label>
+            <${type} name="${name}">
+                ${optionsToSelect}
+            <${type}>
+        </div>    `
+}
 /* 
 const formElement = "<form>" + inputElement('text', 'firsName') + inputElement('file', 'profilePicture') + inputElement('email', 'personalEmail') stb + "</form>";
 */
 const formElemenet = `
+    <div class=container>
     <form id="form">
+    <h2>Jelentkezem az önkéntes munkára</h2>
+    ${inputElement('text', 'lastName', 'Vezetékneved')}
     ${inputElement('text', 'firsName', 'Keresztneved')}
-    ${inputElement('file', 'profilePicture', 'Profilképed')}
     ${inputElement('email', 'personalEmail', 'Email címed')}
-    ${inputElement('radio', 'newsLetter', 'Feliratkozás')}
+    ${selectElement("select", "where", "Hol hallottál rólunk?", ["Válassz", "Interneten", "Ismerőstől", "egyéb"])}
+    ${inputElement('file', 'profilePicture', 'Profilképed')}
+    ${inputElement('checkbox', 'newsLetter', 'Feliratkozás')}
     ${inputElement('checkbox', 'terms', 'Elfogadok mindent')}
-    <button>Ok</button>
+    <button class="myButton">Ok</button>
     </form>
+    </div>
 `;
 
 const formSubmit = (event) => {
     event.preventDefault();
+    const et = event.target;
     console.log(event);
-    event.target.classList.add("submitted");
+    console.log(et);
+    et.classList.add("submitted");
+
+    let selectValue = et.querySelector(`select[name="where"]`).value;
+    console.log(selectValue);
 }
 // ez csak akkor fusson le, ha firstNamet csinálunk, getAttribute
-const inputUpdate = (event) => {
-    document.getElementById("inputValue").innerHTML = event.target.value;
-}
+// const inputUpdate = (event) => {
+//     document.getElementById("inputValue").innerHTML = event.target.value;
+//     console.log(event.target);
+// }
+
 function loadEvent() {
     const root = document.getElementById("root");
     root.insertAdjacentHTML("afterbegin", formElemenet);
