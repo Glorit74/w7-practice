@@ -1,0 +1,186 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+	box-sizing: border-box;
+
+	background: transparent;
+
+	font-family: 'Outfit', sans-serif;
+
+	text-decoration: none;
+}
+
+ol,
+ul,
+li {
+	list-style: none;
+	display: block;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a img {
+	border: none;
+}
+
+button,
+a {
+	cursor: pointer;
+	color: inherit;
+}
+
+textarea {
+	resize: none;
+}
+
+button,
+input,
+textarea,
+select {
+	appearance: none !important;
+	-webkit-appearance: none !important;
+	border-radius: 0;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: space-around;
+	position: relative;
+	top: 20px;
+	margin: auto;
+	padding: 50px;
+
+	width: min-content;
+	height: min-content;
+	background-color: #816531;
+	border-radius: 0 50px;
+	box-shadow: 2px 2px 10px 3px rgb(66, 68, 65);
+}
+
+h2 {
+	margin-bottom: 15px;
+	color: #162c08;
+}
+
+.myButton,
+select {
+	box-shadow: 0px 1px 0px 0px #fff6af;
+	background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color: #ffec64;
+	border-radius: 6px;
+	border: 1px solid #ffaa22;
+	display: inline-block;
+	cursor: pointer;
+	color: #333333;
+	font-family: Arial;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffee66;
+}
+
+.myButton {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 200px;
+}
+.myButton:hover {
+	background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color: #ffab23;
+}
+.myButton:active {
+	position: relative;
+	top: 1px;
+}
+
+label {
+	display: block;
+	font-weight: 400;
+}
+input {
+	width: 500px;
+	margin: 10px;
+	padding: 10px 5px;
+	cursor: pointer;
+	background-color: #faf5cf;
+	border-radius: 5px;
+	border: 1px solid gray;
+}
+
+input:hover {
+	outline: 3px solid darkgoldenrod;
+}
+
+input:focus {
+	outline: 2px solid blueviolet;
+}
+
+select {
+	margin: 5px;
+}
+option {
+	background-color: rgb(194, 212, 153);
+	border-bottom: 3px solid, gray;
+}
+
+input[type='checkbox'] {
+	display: inline-block;
+	background-color: rgb(157, 163, 132);
+	width: 20px;
+	height: 20px;
+}
+
+form div:nth-child(7) {
+	display: flex;
+	align-items: center;
+}
+
+form div:nth-child(8) {
+	display: flex;
+	align-items: center;
+}
+
+#form div.file {
+	position: relative;
+	height: 80px;
+	background-color: bisque;
+
+	&::after {
+		content: 'Kattints vagy húzd ide a fájlodat';
+		font-weight: 300;
+		display: block;
+		text-align: center;
+	}
+
+	label {
+		display: block;
+		text-align: center;
+		padding-top: 10px;
+	}
+
+	input[type='file'] {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 99;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		cursor: pointer;
+	}
+}
+
+#inputValue {
+	width: 200px;
+	height: 200px;
+	object-fit: contain; // a tartalomhoz fog igazodni
+}
