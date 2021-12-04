@@ -120,7 +120,7 @@ const formFields = [
 
 ];
 // ffs form fields
-const formElemenet = (ffs, id) => {
+const formElemenet = (ffs, id, sel) => {
     let inputs = "";
     for (const ff of ffs) {
         inputs += inputElement(ff.type, ff.name, ff.label, ff.req)
@@ -130,13 +130,63 @@ const formElemenet = (ffs, id) => {
     <form id='${id}'>
  
     ${inputs}
-    ${selectElement("select", "where", "Hol hallottál rólunk?", ["Válassz", "Interneten", "Ismerőstől", "egyéb"])}
+    ${selectElement(sel.type, sel.name, sel.label, sel.option)}
     <button class="myButton">Ok</button>
     </form>
     </div>
 `;
-
 }
+
+const selectFields = {
+    type: "select",
+    name: "where",
+    label: "Hol hallottál rólunk",
+    option: [
+        "Válassz", 
+        "Interneten", 
+        "Ismerőstől", 
+        "egyéb"
+    ]
+}
+/* const anotherselectFields = {
+    type: "select",
+    name: "country",
+    label: "Ország",
+    option: ["Magyarország", "Ausztria", "egyéb"]
+    // option: processCountries()
+
+    // üres tömböt hozok létre az országoknak
+    // forof ciklussal bejárom a countryArr-t
+    // [i].name.official -> push
+    // return
+}
+ */
+
+const anotherselectFields = async() => {
+    return {
+    type: "select",
+    name: "country",
+    label: "Ország",
+    // option: ["Mo", "Ausztira"]
+    option: await processCountries()
+}
+}
+
+const processCountries = async () => {
+
+    const countryRes = await fetch("https://restcountries.com/v3.1/all");
+    const countryArr = await countryRes.json();
+    // console.log(countryArr[0].name.official);
+    let countries = [];
+    for (const c of countryArr) {
+        // console.log(c.name.official);
+        countries.push(c.name.official);
+        
+    }
+    return countries;
+}
+
+console.log(processCountries());
 
 /* const formElemenet = `
     <div class=container>
@@ -183,10 +233,11 @@ const inputUpdate = (event) => {
   
 }
 
-function loadEvent() {
+async function loadEvent() {
     const root = document.getElementById("root");
-    root.insertAdjacentHTML("afterbegin", formElemenet(formFields, "form"));
-    root.insertAdjacentHTML("afterbegin", formElemenet(anotherFormFields, "form2"));
+    const waitForAnotherSelectedField = await anotherselectFields();
+    root.insertAdjacentHTML("afterbegin", formElemenet(formFields, "form", selectFields));
+    root.insertAdjacentHTML("afterbegin", formElemenet(anotherFormFields, "form2", waitForAnotherSelectedField));
     root.insertAdjacentHTML("afterbegin", `
     <div id="inputValue"></div>
     `);
